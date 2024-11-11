@@ -1,12 +1,13 @@
 let makePayment = function(isValid) {
 
    let pr = new Promise(function (resolve, reject) {
-      if(successtype){
+      if(isValid){
          setTimeout(() => {
             resolve(" Promise Resolved ...!");
          }, 5000);
       }else{
-         reject("Promise Failed...");
+         error = new Error("Promise failed or rejected...!")
+         reject(error);
       }
       
    });
@@ -19,7 +20,8 @@ let makePayment = function(isValid) {
 
 
 // console.log(makePayment);
-makePayment(false).then(function (response) {
+makePayment(false)
+.then(function (response) {
    console.log(response);
    return new Promise((resolve , reject) => {
       setTimeout(() => {
@@ -27,7 +29,9 @@ makePayment(false).then(function (response) {
       }, 5000);
    }
 );  
-}).then((res)=>{
+})
+.then((res)=>{
    console.log(res);
-});
+})
+.catch(() => {console.log(error.message)});
 // console.log(makePayment);
